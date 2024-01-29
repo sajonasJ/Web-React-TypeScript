@@ -81,7 +81,7 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
 
     return (
         <form className='form-box' onSubmit={handleSubmit}>
-            <h1>Sign Up</h1>
+            <h2>Sign Up</h2>
             <label>
                 First Name:
                 <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />

@@ -5,8 +5,10 @@ import SignUp from '../components/Signup';
 function Main() {
     return (
         <div className="main-container">
-            Main
-            <SignUp/>
+            <h2>Task List</h2>
+
+            
+            {/* <SignUp/> */}
         </div>
         
     );
