@@ -41,7 +41,7 @@ input {
 }
 
 .middle-card{
-    display: flex;
+    display: none;
     flex-direction: row;
     width: 100%;
     border: 1px solid black;
@@ -52,7 +52,7 @@ input {
 }
 
 .bottom-card{
-    display: flex;
+    display: none;
     border: 1px solid black;
     margin: 0px;
     padding:0px;

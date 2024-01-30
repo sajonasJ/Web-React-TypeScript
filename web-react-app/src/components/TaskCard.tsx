@@ -14,7 +14,7 @@ const TaskCard = ({
     title = 'Buy new car',
     description = 'Things to do first',
     duedate = '07/29/1989',
-    priority = 'Important'
+    priority = ' Important'
 }: CardProps) => {
     const [isChecked, setIsChecked] = useState(false);
 
@@ -30,7 +30,7 @@ const TaskCard = ({
                         <h3 className="taskcard-title">{title}</h3>
                     </div>
                     <div className='status-card'>
-                        <label className="taskcard-label">Status:</label>
+                        <label className="taskcard-label">Status: </label>
                         <p className="taskcard-priority">{priority}</p>
                     </div>
                 </div>
