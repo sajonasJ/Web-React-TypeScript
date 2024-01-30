@@ -55,7 +55,7 @@ const TaskCard = ({
                 )}
             </div>
             <div className='right-card'>
-                <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+                <input className='card-input' type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
             </div>
         </div>
     );

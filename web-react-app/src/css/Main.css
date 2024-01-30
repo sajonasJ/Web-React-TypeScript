@@ -1,4 +1,4 @@
-.main-container{
+.main-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -6,7 +6,7 @@
     margin-top: 0px;
 }
 
-.task-list{
+.task-list {
     background-color: aqua;
     width: 100%;
     padding-bottom: .5rem;
@@ -20,4 +20,79 @@
     gap: 5px;
     padding: 5px;
     width: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* semi-transparent black */
+    display: none;
+    z-index: 10;
+    /* Make sure the overlay is above other elements */
+}
+
+/* dialog */
+/* CSS code */
+.dialog-modal {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 20;
+    /* Make sure the dialog is above other elements */
+}
+
+.dialog-h2 {
+    margin-bottom: 10px;
+}
+
+.dialog-label {
+    display: flex;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.dialog-select {
+    text-align: center;
+    width: 100%;
+    padding: 3px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    box-sizing: border-box;
+}
+
+.dialog-text,
+.dialog-textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    box-sizing: border-box;
+}
+
+.dialog-date{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.dialog-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dialog-button:hover {
+    background-color: #45a049;
 }

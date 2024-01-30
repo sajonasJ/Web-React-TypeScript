@@ -50,7 +50,7 @@ function Main() {
     return (
         <div className="main-container">
             <h2 className='task-list'>Task List</h2>
-            {/* Action Buttons */}
+            <div className="overlay" style={{ display: isAddModalOpen ? 'block' : 'none' }}></div>
             <div className="action-buttons">
                 <TaskButton label="Add" onClickHandler={() => handleAction('add')} color="#8ac926" />
                 <TaskButton label="Edit" onClickHandler={() => handleAction('edit')} color="#ffca3a" />
@@ -66,19 +66,19 @@ function Main() {
             {/* Add Task Modal */}
             {isAddModalOpen && (
                 <dialog className='dialog-modal' open>
-                    <h2>Add Task</h2>
-                    <label>Title: <input type="text" /></label>
-                    <label>Description: <textarea></textarea></label>
-                    <label>Due Date: <input type="date" /></label>
-                    <label>Status:
-                        <select>
-                            <option value="important">Important</option>
-                            <option value="normal">Normal</option>
-                            <option value="low">Low</option>
+                    <h2 className='dialog-h2'>Add Task</h2>
+                    <label className='dialog-label'>Title: <input className='dialog-text' type="text" /></label>
+                    <label className='dialog-label'>Description: <textarea className='dialog-textarea'></textarea></label>
+                    <label className='dialog-label'>Due Date: <input className='dialog-date' type="date" /></label>
+                    <label className='dialog-label'>Priority:
+                        <select className='dialog-select'>
+                            <option className='dialog-option' value="important">Important</option>
+                            <option className='dialog-option' value="normal">Normal</option>
+                            <option className='dialog-option' value="low">Low</option>
                         </select>
                     </label>
-                    <button onClick={handleAddTask}>Add Task</button>
-                    <button onClick={handleAddModalClose}>Cancel</button>
+                    <button className='dialog-button' onClick={handleAddTask}>Add Task</button>
+                    <button className='dialog-button' onClick={handleAddModalClose}>Cancel</button>
                 </dialog>
             )}
         </div>
