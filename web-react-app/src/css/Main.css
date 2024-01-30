@@ -37,7 +37,7 @@
 
 /* dialog */
 /* CSS code */
-.dialog-modal {
+/* .dialog-modal {
     width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -45,9 +45,9 @@
     background-color: #fff;
     z-index: 20;
     /* Make sure the dialog is above other elements */
-}
+/* } */
 
-.dialog-h2 {
+/* .dialog-h2 {
     margin-bottom: 10px;
 }
 
@@ -91,8 +91,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 
-.dialog-button:hover {
+/* .dialog-button:hover {
     background-color: #45a049;
-}
+}  */

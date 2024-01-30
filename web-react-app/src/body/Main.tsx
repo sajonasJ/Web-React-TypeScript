@@ -3,6 +3,7 @@ import TaskCard from '../components/TaskCard';
 import SignUp from '../components/Signup';
 import TaskButton from '../components/TaskButton';
 import React, { useState } from 'react';
+import NewCard from '../components/NewCard';
 
 function Main() {
     const [isMiddleCardVisible, setIsMiddleCardVisible] = useState(false);
@@ -63,24 +64,11 @@ function Main() {
             />
             {/* <SignUp/> */}
 
-            {/* Add Task Modal */}
             {isAddModalOpen && (
-                <dialog className='dialog-modal' open>
-                    <h2 className='dialog-h2'>Add Task</h2>
-                    <label className='dialog-label'>Title: <input className='dialog-text' type="text" /></label>
-                    <label className='dialog-label'>Description: <textarea className='dialog-textarea'></textarea></label>
-                    <label className='dialog-label'>Due Date: <input className='dialog-date' type="date" /></label>
-                    <label className='dialog-label'>Priority:
-                        <select className='dialog-select'>
-                            <option className='dialog-option' value="important">Important</option>
-                            <option className='dialog-option' value="normal">Normal</option>
-                            <option className='dialog-option' value="low">Low</option>
-                        </select>
-                    </label>
-                    <button className='dialog-button' onClick={handleAddTask}>Add Task</button>
-                    <button className='dialog-button' onClick={handleAddModalClose}>Cancel</button>
-                </dialog>
-            )}
+                <NewCard
+                    handleAddTask={handleAddTask}
+                    handleAddModalClose={handleAddModalClose}
+           /> )}
         </div>
 
     );
