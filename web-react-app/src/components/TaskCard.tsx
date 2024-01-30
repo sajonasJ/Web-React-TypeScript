@@ -8,13 +8,19 @@ interface CardProps {
     description?: string;
     duedate?: number | string;
     priority?: string;
+
+    isMiddleCardVisible?: boolean;
+    isBottomCardVisible?: boolean;
 }
 
 const TaskCard = ({
     title = 'Buy new car',
     description = 'Things to do first',
     duedate = '07/29/1989',
-    priority = ' Important'
+    priority = ' Important',
+
+    isMiddleCardVisible = false,
+    isBottomCardVisible = false,
 }: CardProps) => {
     const [isChecked, setIsChecked] = useState(false);
 
@@ -35,15 +41,18 @@ const TaskCard = ({
                     </div>
                 </div>
 
-                <div className='middle-card'>
-                    <label className="taskcard-label">Description:</label>
-                    <p className="taskcard-text">{description}</p>
-                </div>
-
-                <div className='bottom-card'>
-                    <label className="taskcard-label">Due Date:</label>
-                    <p className="taskcard-due">{duedate}</p>
-                </div>
+                {isMiddleCardVisible && (
+                    <div className='middle-card'>
+                        <label className="taskcard-label">Description:</label>
+                        <p className="taskcard-text">{description}</p>
+                    </div>
+                )}
+                {isBottomCardVisible && (
+                    <div className='bottom-card'>
+                        <label className="taskcard-label">Due Date:</label>
+                        <p className="taskcard-due">{duedate}</p>
+                    </div>
+                )}
             </div>
             <div className='right-card'>
                 <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />

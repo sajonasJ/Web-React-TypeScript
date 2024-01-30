@@ -41,7 +41,7 @@ input {
 }
 
 .middle-card{
-    display: none;
+    display: flex;
     flex-direction: row;
     width: 100%;
     border: 1px solid black;
@@ -52,7 +52,7 @@ input {
 }
 
 .bottom-card{
-    display: none;
+    display: flex;
     border: 1px solid black;
     margin: 0px;
     padding:0px;
@@ -66,3 +66,45 @@ input {
     flex-direction: row;
     align-items: center;
 }
+
+/* dialog */
+/* CSS code */
+dialog {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
