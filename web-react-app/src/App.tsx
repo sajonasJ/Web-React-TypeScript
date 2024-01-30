@@ -7,8 +7,10 @@ import Main from './body/Main';
 function App() {
   return (
     <div className="App">
+      <div className='App-top'>
       <Header />
       <Main />
+      </div>
       <Footer />
     </div>
   );

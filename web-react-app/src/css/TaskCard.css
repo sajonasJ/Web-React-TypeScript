@@ -6,13 +6,63 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
-    gap: 5px;
-    justify-content: space-around;
+    justify-content: space-between;
     min-width: 90%;
     align-items: center;
+}
+.left-card{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    width: 95%;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+}
+.right-card{
+    display:flex;
+    width: 5%;
+    justify-content: center;
 }
 
 input {
     width: 20px;
     height: 20px;
+}
+
+.top-card{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 10%;
+    border: 1px solid black;
+    align-items: center;
+}
+
+.middle-card{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid black;
+    margin: 0px;
+    padding-left: 5%;
+    overflow: hidden;
+    align-items: center;
+}
+
+.bottom-card{
+    display: flex;
+    border: 1px solid black;
+    margin: 0px;
+    padding:0px;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.status-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

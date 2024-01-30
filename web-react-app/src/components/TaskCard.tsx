@@ -11,11 +11,10 @@ interface CardProps {
 }
 
 const TaskCard = ({
-    num = '1',
-    title = 'Title',
-    description = 'Description',
-    duedate = 'Due Date',
-    priority = 'Status'
+    title = 'Buy new car',
+    description = 'Things to do first',
+    duedate = '07/29/1989',
+    priority = 'Important'
 }: CardProps) => {
     const [isChecked, setIsChecked] = useState(false);
 
@@ -25,12 +24,30 @@ const TaskCard = ({
 
     return (
         <div className="taskcard-container">
-            <p className='taskcard-num'>{num}</p>
-            <h3 className="taskcard-title">{title}</h3>
-            <p className="taskcard-text">{description}</p>
-            <p className="taskcard-due">{duedate}</p>
-            <p className="taskcard-priority">{priority}</p>
-            <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+            <div className='left-card'>
+                <div className='top-card'>
+                    <div className='title-card'>
+                        <h3 className="taskcard-title">{title}</h3>
+                    </div>
+                    <div className='status-card'>
+                        <label className="taskcard-label">Status:</label>
+                        <p className="taskcard-priority">{priority}</p>
+                    </div>
+                </div>
+
+                <div className='middle-card'>
+                    <label className="taskcard-label">Description:</label>
+                    <p className="taskcard-text">{description}</p>
+                </div>
+
+                <div className='bottom-card'>
+                    <label className="taskcard-label">Due Date:</label>
+                    <p className="taskcard-due">{duedate}</p>
+                </div>
+            </div>
+            <div className='right-card'>
+                <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+            </div>
         </div>
     );
 };
