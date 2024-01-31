@@ -14,6 +14,11 @@ function Main() {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [tasks, setTasks] = useState<TaskObject[]>([]);
 
+    const handleCheckboxChange = (index?: number) => {
+        const updatedTasks = [...tasks];
+        setTasks(updatedTasks);
+    };
+
 
     const handleAction = (action: string) => {
         // Handle the logic for each action here
@@ -72,18 +77,17 @@ function Main() {
                 <TaskButton label="View" onClickHandler={() => handleAction('view')} color="#1982c4" />
                 <TaskButton label="Delete" onClickHandler={() => handleAction('delete')} color="#ff595e" />
             </div>
-            <TaskCard
-                isMiddleCardVisible={isMiddleCardVisible}
-                isBottomCardVisible={isBottomCardVisible}
-            />
+
             {/* <SignUp/> */}
 
             {/* Render existing tasks */}
             {tasks.map((task: TaskObject, index) => (
-                <TaskCard key={index}
-                    {...task}
-                    isMiddleCardVisible={isMiddleCardVisible}
-                    isBottomCardVisible={isBottomCardVisible}
+                <TaskCard  key={index}
+                index={index} // Pass the index as a prop
+                {...task}
+                isMiddleCardVisible={isMiddleCardVisible}
+                isBottomCardVisible={isBottomCardVisible}
+                onCheckboxChange={handleCheckboxChange} // Pass the callback function
                 />
             ))}
 

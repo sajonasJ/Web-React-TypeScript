@@ -11,6 +11,8 @@ interface CardProps {
 
     isMiddleCardVisible?: boolean;
     isBottomCardVisible?: boolean;
+    index?: number;
+    onCheckboxChange: (index: number) => void;
 }
 
 const TaskCard = ({
@@ -22,11 +24,15 @@ const TaskCard = ({
 
     isMiddleCardVisible = false,
     isBottomCardVisible = false,
+    index, // Retrieve index from props
+    onCheckboxChange, // Retrieve callback function from props
 }: CardProps) => {
     const [isChecked, setIsChecked] = useState(false);
 
-    const handleCheckboxChange = () => {
+    const tickBox = () => {
         setIsChecked(!isChecked);
+        onCheckboxChange(index||0);
+        console.log(index);
     };
 
     return (
@@ -64,7 +70,7 @@ const TaskCard = ({
                 )}
             </div>
             <div className='right-card'>
-                <input className='card-input' type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+                <input className='card-input' type="checkbox" checked={isChecked} onChange={tickBox} />
             </div>
         </div>
     );
