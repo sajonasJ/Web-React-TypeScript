@@ -3,18 +3,19 @@ import '../css/TaskCard.css';
 import React, { useState } from 'react';
 
 interface CardProps {
-    title?: string;
-    description?: string;
-    duedate?: Date;
-    status?: string;
+    title: string;
+    description: string;
+    duedate: Date;
+    status: string;
     priority?: string;
 
     isMiddleCardVisible?: boolean;
     isBottomCardVisible?: boolean;
-    index?: number;
+    index: number;
     isChecked: boolean;
     onCheckboxChange: (index: number) => void;
     onDelete: () => void;
+    onEdit: () => void;
 }
 
 const TaskCard = ({
@@ -29,12 +30,13 @@ const TaskCard = ({
     index, // Retrieve index from props
     onCheckboxChange, // Retrieve callback function from props
     onDelete, // Include onDelete in the function arguments
+    onEdit,
 }: CardProps) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const tickBox = () => {
         setIsChecked(!isChecked);
-        onCheckboxChange(index||0);
+        onCheckboxChange(index || 0);
         console.log(index);
     };
 
