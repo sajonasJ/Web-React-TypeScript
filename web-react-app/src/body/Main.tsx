@@ -4,11 +4,16 @@ import SignUp from '../components/Signup';
 import TaskButton from '../components/TaskButton';
 import React, { useState } from 'react';
 import NewCard from '../components/NewCard';
+import {TaskObject} from '../components/NewCard';
+
+
 
 function Main() {
     const [isMiddleCardVisible, setIsMiddleCardVisible] = useState(false);
     const [isBottomCardVisible, setIsBottomCardVisible] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [tasks, setTasks] = useState<TaskObject[]>([]);
+
 
     const handleAction = (action: string) => {
         // Handle the logic for each action here
@@ -41,11 +46,20 @@ function Main() {
         // Close the Add modal
         setIsAddModalOpen(false);
     };
-    const handleAddTask = () => {
-        // Implement logic to handle adding a task here
-        // You can access the input values and perform necessary actions
-        alert('Task added!');
-        setIsAddModalOpen(false); // Close the modal after adding a task
+    const handleAddTask = (newTask: TaskObject) => {
+        // Create a new task object using the input values from NewCard
+        // For simplicity, assuming newTask has the same structure as TaskObject
+        // In a real application, you might want to validate and sanitize input values
+        const updatedTasks = [...tasks, newTask];
+
+        // Update the state with the new array of tasks
+        setTasks(updatedTasks);
+
+        // Close the modal after adding a task
+        setIsAddModalOpen(false);
+        // console.log(newTask);
+        console.log(updatedTasks);
+
     };
 
     return (
@@ -64,11 +78,17 @@ function Main() {
             />
             {/* <SignUp/> */}
 
+            {/* Render existing tasks */}
+            {tasks.map((task: TaskObject, index) => (
+                <TaskCard key={index} {...task} />
+            ))}
+
+
             {isAddModalOpen && (
                 <NewCard
                     handleAddTask={handleAddTask}
                     handleAddModalClose={handleAddModalClose}
-           /> )}
+                />)}
         </div>
 
     );
