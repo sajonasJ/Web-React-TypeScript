@@ -23,12 +23,20 @@ function Main() {
         switch (action) {
             case 'add':
                 // Perform add operation
+                console.log(isEdit);
+                if (isEdit) {
+                    // If isEdit is true, return from the function
+                    return;
+                }
                 alert('Add operation clicked!');
-                setIsEdit(false); // Set isEdit to false when adding a new task
                 setIsAddModalOpen(true);
+                setIsEdit(false); // Set isEdit to false when adding a new task
+                setCurrentTask(null); // Clear the current task
+                setCheckedIndexes([]); // Clear the checked indexes
                 break;
             case 'edit':
                 // Perform edit operation
+                console.log(isEdit);
                 alert('Edit operation clicked!');
                 if (index !== undefined) {
                     setIsEdit(true); // Set isEdit to true when editing an existing task
@@ -54,6 +62,7 @@ function Main() {
             default:
                 // Default action or error handling
                 console.error('Invalid action');
+                setIsEdit(false);
         }
     };
     const handleSort = (selectedOption: string) => {
@@ -77,6 +86,8 @@ function Main() {
     const handleAddModalClose = () => {
         // Close the Add modal
         setIsAddModalOpen(false);
+        setIsEdit(false); 
+        setCurrentTask(null); // Clear the current task
     };
     const handleAddTask = (newTask: TaskObject) => {
         const updatedTasks = [...tasks, newTask];
