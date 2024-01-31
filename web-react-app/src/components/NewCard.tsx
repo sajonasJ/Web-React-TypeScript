@@ -4,6 +4,8 @@ interface NewCardProps {
     handleAddTask: () => void;
     handleAddModalClose: () => void;
 }
+
+
 function NewCard({ handleAddTask, handleAddModalClose }: NewCardProps) {
     return (
         <dialog className='dialog-modal' open>
@@ -27,12 +29,22 @@ function NewCard({ handleAddTask, handleAddModalClose }: NewCardProps) {
                 </label>
             </div>
 
-            <div className='dialog-label-grp'>
+            <div className='dialog-priority-grp'>
                 <label className='dialog-label'><h3 className='dialog-h3'>Priority:</h3>
                     <select className='dialog-select'>
-                        <option className='dialog-option' value="important">Important</option>
-                        <option className='dialog-option' value="normal">Normal</option>
+                        <option className='dialog-option' value="high">High</option>
+                        <option className='dialog-option' value="medium">Medium</option>
                         <option className='dialog-option' value="low">Low</option>
+                    </select>
+                </label>
+            </div>
+
+            <div className='dialog-status-grp'>
+                <label className='dialog-label'><h3 className='dialog-h3'>Status:</h3>
+                    <select className='dialog-select'>
+                        <option className='dialog-option' value="pending">Pending</option>
+                        <option className='dialog-option' value="completed">Completed</option>
+                        <option className='dialog-option' value="overdue">Overdue</option>
                     </select>
                 </label>
             </div>

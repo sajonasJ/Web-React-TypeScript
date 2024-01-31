@@ -55,9 +55,10 @@
     display: flex;
     border: 1px solid black;
     margin: 0px;
-    padding:0px;
+    padding-left:0px;
+    padding-right: 10%;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -67,5 +68,15 @@
     align-items: center;
 }
 
-
-  
+.priority-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 5%;
+}
+.due-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}

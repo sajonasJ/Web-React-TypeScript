@@ -3,10 +3,10 @@ import '../css/TaskCard.css';
 import React, { useState } from 'react';
 
 interface CardProps {
-    num?: number | string;
     title?: string;
     description?: string;
-    duedate?: number | string;
+    duedate?: Date;
+    status?: string;
     priority?: string;
 
     isMiddleCardVisible?: boolean;
@@ -16,8 +16,9 @@ interface CardProps {
 const TaskCard = ({
     title = 'Buy new car',
     description = 'Things to do first',
-    duedate = '07/29/1989',
-    priority = ' Important',
+    duedate = new Date('07/29/1989'),
+    status = 'Pending',
+    priority = 'High',
 
     isMiddleCardVisible = false,
     isBottomCardVisible = false,
@@ -37,7 +38,7 @@ const TaskCard = ({
                     </div>
                     <div className='status-card'>
                         <label className="taskcard-label">Status: </label>
-                        <p className="taskcard-priority">{priority}</p>
+                        <p className="taskcard-status">{status}</p>
                     </div>
                 </div>
 
@@ -49,8 +50,16 @@ const TaskCard = ({
                 )}
                 {isBottomCardVisible && (
                     <div className='bottom-card'>
-                        <label className="taskcard-label">Due Date:</label>
-                        <p className="taskcard-due">{duedate}</p>
+                        <div className='priority-card'>
+                            <label className="taskcard-label">Priority:</label>
+                            <p className="taskcard-priority">{priority}</p>
+                        </div>
+                        <div className='due-card'>
+                            <label className="taskcard-label">Due Date:</label>
+                            <p className="taskcard-due">{duedate?.toLocaleDateString()}</p>
+
+                        </div>
+
                     </div>
                 )}
             </div>
