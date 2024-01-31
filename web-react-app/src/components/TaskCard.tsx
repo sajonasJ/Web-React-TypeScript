@@ -12,7 +12,9 @@ interface CardProps {
     isMiddleCardVisible?: boolean;
     isBottomCardVisible?: boolean;
     index?: number;
+    isChecked: boolean;
     onCheckboxChange: (index: number) => void;
+    onDelete: () => void;
 }
 
 const TaskCard = ({
@@ -26,6 +28,7 @@ const TaskCard = ({
     isBottomCardVisible = false,
     index, // Retrieve index from props
     onCheckboxChange, // Retrieve callback function from props
+    onDelete, // Include onDelete in the function arguments
 }: CardProps) => {
     const [isChecked, setIsChecked] = useState(false);
 

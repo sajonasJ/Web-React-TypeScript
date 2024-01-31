@@ -16,23 +16,6 @@ export interface TaskObject {
 
 
 function NewCard({ handleAddTask, handleAddModalClose }: NewCardProps) {
-    // const handleAddTaskClick = () => {
-    //     // Retrieve input values and create a TaskObject
-    //     const newTask: TaskObject = {
-    //         title: (document.getElementById('title') as HTMLInputElement).value,
-    //         description: (document.getElementById('description') as HTMLTextAreaElement).value,
-    //         duedate: new Date((document.getElementById('duedate') as HTMLInputElement).value),
-    //         priority: (document.getElementById('priority') as HTMLSelectElement).value,
-    //         status: (document.getElementById('status') as HTMLSelectElement).value,
-    //     };
-
-    //     // Call the original handleAddTask function with the newTask
-    //     handleAddTask(newTask);
-
-
-    //     // Close the modal after adding a task
-    //     handleAddModalClose();
-    // };
 
     const handleAddTaskClick = () => {
         // Retrieve input values and create a TaskObject
@@ -86,7 +69,7 @@ function NewCard({ handleAddTask, handleAddModalClose }: NewCardProps) {
             </div>
 
             <div className='dialog-priority-grp'>
-                <label className='dialog-label'><h3 className='dialog-h3'>Priority:</h3>
+                <label className='dialog-label-row'><h3 className='dialog-h3'>Priority:</h3>
                     <select className='dialog-select-priority'>
                         <option className='dialog-option' value="high">High</option>
                         <option className='dialog-option' value="medium">Medium</option>
@@ -96,7 +79,7 @@ function NewCard({ handleAddTask, handleAddModalClose }: NewCardProps) {
             </div>
 
             <div className='dialog-status-grp'>
-                <label className='dialog-label'><h3 className='dialog-h3'>Status:</h3>
+                <label className='dialog-label-row'><h3 className='dialog-h3'>Status:</h3>
                     <select className='dialog-select-status'>
                         <option className='dialog-option' value="pending">Pending</option>
                         <option className='dialog-option' value="completed">Completed</option>
