@@ -4,7 +4,7 @@ import SignUp from '../components/Signup';
 import TaskButton from '../components/TaskButton';
 import React, { useState } from 'react';
 import NewCard from '../components/NewCard';
-import {TaskObject} from '../components/NewCard';
+import { TaskObject } from '../components/NewCard';
 
 
 
@@ -80,7 +80,11 @@ function Main() {
 
             {/* Render existing tasks */}
             {tasks.map((task: TaskObject, index) => (
-                <TaskCard key={index} {...task} />
+                <TaskCard key={index}
+                    {...task}
+                    isMiddleCardVisible={isMiddleCardVisible}
+                    isBottomCardVisible={isBottomCardVisible}
+                />
             ))}
 
 
