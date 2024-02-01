@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import '../css/Form.css';
 
-// declare interface SignUpProps
 interface FormProps {
     onSubmit: (formData: FormData) => void;
 }
-// declare interface FormData
+
 interface FormData {
     firstName: string;
     lastName: string;
@@ -13,7 +12,7 @@ interface FormData {
     password: string;
 }
 
-const Form: React.FC<FormProps> = ({ onSubmit }) => {
+const Form = ({ onSubmit }: FormProps) => {
     const [formData, setFormData] = useState<FormData>({
         firstName: '',
         lastName: '',
@@ -21,7 +20,6 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
         password: '',
     });
 
-    //UseStates for error messages
     const [firstNameError, setFirstNameError] = useState<string | null>(null);
     const [lastNameError, setLastNameError] = useState<string | null>(null);
     const [emailError, setEmailError] = useState<string | null>(null);
