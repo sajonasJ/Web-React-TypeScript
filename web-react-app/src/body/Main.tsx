@@ -17,6 +17,7 @@ function Main() {
     const [currentTask, setCurrentTask] = useState<TaskObject | null>(null);
     const [isEdit, setIsEdit] = useState(false);
     const [groupedTasks, setGroupedTasks] = useState<Record<string, TaskObject[]>>({});
+    const [filterOption, setFilterOption] = useState('default');
 
     useEffect(() => {
         const groups: Record<string, TaskObject[]> = {};
@@ -94,6 +95,7 @@ function Main() {
     };
 
     const handleFilter = (selectedOption: string) => {
+        setFilterOption(selectedOption);
     };
 
     const sortOptions: SortOption[] = [
@@ -162,7 +164,13 @@ function Main() {
                 {Object.entries(groupedTasks).map(([group, tasksInGroup]) => (
                     <div className='groupings' key={group}>
                         <h3 className='h3-groupings'>{group}</h3>
-                        {tasksInGroup.map((task: TaskObject) => {
+                        {tasksInGroup.filter(task => {
+                            if (filterOption === 'default') {
+                                return true;
+                            } else {
+                                return task.status === filterOption;
+                            }
+                        }).map((task: TaskObject) => {
                             const taskIndex = tasks.findIndex(t => t.id === task.id);
                             return (
                                 <TaskCard key={task.id}
