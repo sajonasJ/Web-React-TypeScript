@@ -90,9 +90,35 @@ function Main() {
         }
     };
     const handleSort = (selectedOption: string) => {
-        // Implement sorting logic based on the selected option
-        // Update the 'tasks' state with the sorted array
-        // For example, you can use the Array.sort() method
+        let sortedTasks = [...tasks]; // Create a copy of the tasks array
+
+        switch (selectedOption) {
+            case 'nameAsc':
+                sortedTasks.sort((a, b) => a.title.localeCompare(b.title));
+                break;
+            case 'nameDesc':
+                sortedTasks.sort((a, b) => b.title.localeCompare(a.title));
+                break;
+            case 'dateAsc':
+                sortedTasks.sort((a, b) => new Date(a.duedate).getTime() - new Date(b.duedate).getTime());
+                break;
+            case 'dateDesc':
+                sortedTasks.sort((a, b) => new Date(b.duedate).getTime() - new Date(a.duedate).getTime());
+                break;
+            case 'high':
+                sortedTasks = sortedTasks.filter(task => task.priority === 'high');
+                break;
+            case 'medium':
+                sortedTasks = sortedTasks.filter(task => task.priority === 'medium');
+                break;
+            case 'low':
+                sortedTasks = sortedTasks.filter(task => task.priority === 'low');
+                break;
+            default:
+                // If 'default' is selected, do nothing
+                break;
+        }
+        setTasks(sortedTasks);
     };
 
     const handleFilter = (selectedOption: string) => {
