@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import '../css/Form.css';
 
+// Define FormProps interface for onSubmit prop
 interface FormProps {
     onSubmit: (formData: FormData) => void;
 }
-
+// Define FormData interface for form data
 interface FormData {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
 }
-
+// Form component
 const Form = ({ onSubmit }: FormProps) => {
+    // Define state for form data and error messages
     const [formData, setFormData] = useState<FormData>({
         firstName: '',
         lastName: '',
@@ -25,6 +27,7 @@ const Form = ({ onSubmit }: FormProps) => {
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
 
+    // Handle input change and validation
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -32,6 +35,7 @@ const Form = ({ onSubmit }: FormProps) => {
             [name]: value,
         }));
 
+        // Validate input based on input name
         // Validate first name
         if (name === 'firstName') {
             const isValid = isNameValid(value);
@@ -55,7 +59,7 @@ const Form = ({ onSubmit }: FormProps) => {
             setPasswordError(isValid ? null : 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.');
         }
     };
-
+    // Validation functions
     // Validate password
     const isNameValid = (name: string): boolean => {
         const nameRegex = /^[A-Za-z]+$/;
@@ -72,9 +76,10 @@ const Form = ({ onSubmit }: FormProps) => {
         return passwordRegex.test(password);
     };
 
+    // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
+        // onSubmit function is not called
     };
 
     return (

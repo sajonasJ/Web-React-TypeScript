@@ -1,7 +1,9 @@
+// Import necessary libraries and components
 import TaskButton from '../components/TaskButton';
 import '../css/TaskCard.css';
 import React, { useState } from 'react';
 
+// Define CardProps interface for card properties
 interface CardProps {
     title: string;
     description: string;
@@ -18,6 +20,7 @@ interface CardProps {
     onEdit: () => void;
 }
 
+// TaskCard component
 const TaskCard = ({
     title = 'Buy new car',
     description = 'Things to do first',
@@ -27,19 +30,22 @@ const TaskCard = ({
 
     isMiddleCardVisible = false,
     isBottomCardVisible = false,
-    index, // Retrieve index from props
-    onCheckboxChange, // Retrieve callback function from props
-    onDelete, // Include onDelete in the function arguments
+    index,
+    onCheckboxChange,
+    onDelete,
     onEdit,
 }: CardProps) => {
+    // Define state for checkbox
     const [isChecked, setIsChecked] = useState(false);
 
+    // Handle checkbox change
     const tickBox = () => {
         setIsChecked(!isChecked);
         onCheckboxChange(index || 0);
         console.log(index);
     };
 
+    // Render TaskCard component
     return (
         <div className="taskcard-container">
             <div className='left-card'>

@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import '../css/Main.css';
 import TaskCard from '../components/TaskCard';
 import TaskButton from '../components/TaskButton';
@@ -7,7 +8,9 @@ import { TaskObject, StorageService } from '../components/Storage';
 import SortButton, { SortOption } from '../components/SortButton';
 import FilterButton, { FilterOption } from '../components/FilterButton';
 
+// Main component
 function Main() {
+    // Define state variables
     const [isMiddleCardVisible, setIsMiddleCardVisible] = useState(false);
     const [isBottomCardVisible, setIsBottomCardVisible] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -18,12 +21,12 @@ function Main() {
     const [groupedTasks, setGroupedTasks] = useState<Record<string, TaskObject[]>>({});
     const [filterOption, setFilterOption] = useState('default');
 
+    // Initialize tasks from StorageService when the component mounts
     useEffect(() => {
-        // Initialize tasks from StorageService when the component mounts
         setTasks(StorageService.getTasks());
     }, []);
 
-
+    // Group tasks by their group property
     useEffect(() => {
         const groups: Record<string, TaskObject[]> = {};
         tasks.forEach(task => {
@@ -36,10 +39,8 @@ function Main() {
         setGroupedTasks(groups);
     }, [tasks]);
 
-
-
+    // Handle different actions
     const handleAction = (action: string, index?: number) => {
-        // Handle the logic for each action here
         switch (action) {
             case 'add':
                 // Perform add operation
@@ -54,6 +55,7 @@ function Main() {
                 setCurrentTask(null); // Clear the current task
                 setCheckedIndexes([]); // Clear the checked indexes
                 break;
+
             case 'edit':
                 // Perform edit operation
                 console.log(isEdit);
@@ -66,10 +68,12 @@ function Main() {
                     console.log(index);
                 }
                 break;
+
             case 'delete':
                 alert('Delete operation clicked!');
                 handleDelete(); // Use the handleDelete function
                 break;
+
             case 'view':
                 alert('View operation clicked!');
                 setIsMiddleCardVisible(!isMiddleCardVisible);
@@ -89,7 +93,9 @@ function Main() {
                 setIsEdit(false);
         }
     };
+    // Handle sorting of tasks
     const handleSort = (selectedOption: string) => {
+        // Sort tasks based on the selected option
         let sortedTasks = [...tasks]; // Create a copy of the tasks array
 
         switch (selectedOption) {
@@ -121,10 +127,12 @@ function Main() {
         setTasks(sortedTasks);
     };
 
+    // Handle filtering of tasks
     const handleFilter = (selectedOption: string) => {
         setFilterOption(selectedOption);
     };
 
+    // Define sort options and filter options
     const sortOptions: SortOption[] = [
         { label: 'Sort By: Default ', value: 'default' },
         { label: 'Name: (A-Z)', value: 'nameAsc' },
@@ -134,7 +142,6 @@ function Main() {
         { label: 'Priorit: High', value: 'high' },
         { label: 'Priority: Medium', value: 'medium' },
         { label: 'Priority: Low', value: 'low' },
-
     ];
     const filterOptions: FilterOption[] = [
         { label: 'Filter By: Default ', value: 'default' },
@@ -143,14 +150,17 @@ function Main() {
         { label: 'Overdue', value: 'overdue' },
     ];
 
+    // Handle closing of the add modal
     const handleAddModalClose = () => {
         setIsAddModalOpen(false);
         setIsEdit(false);
         setCurrentTask(null);
     };
 
+    // Define a ref for the task id counter
     const taskIdCounter = useRef(StorageService.getCounter() || 0);
 
+    // Handle adding of a task
     const handleAddTask = (newTask: TaskObject) => {
         if (isEdit && currentTask) {
             // If isEdit is true and currentTask is not null, update the existing task
@@ -167,6 +177,8 @@ function Main() {
         }
         setIsAddModalOpen(false);
     };
+
+    // Handle change of a checkbox
     const handleCheckboxChange = (index: number) => {
         const updatedCheckedIndexes = checkedIndexes.includes(index)
             ? checkedIndexes.filter((i) => i !== index)
@@ -176,11 +188,14 @@ function Main() {
         console.log('handlecheckboxchange', index);
     };
 
+    // Handle deletion of tasks
     const handleDelete = () => {
         const updatedTasks = tasks.filter((_, index) => !checkedIndexes.includes(index));
         setTasks(updatedTasks);
         setCheckedIndexes([]);
     }
+
+    // Render the Main component
     return (
         <div className="main-container">
             <h2 className='task-list'>Task List</h2>
