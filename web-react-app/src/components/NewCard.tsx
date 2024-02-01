@@ -7,17 +7,21 @@ interface NewCardProps {
     handleAddTask: (newTask: TaskObject) => void;
     handleAddModalClose: () => void;
     currentTask: TaskObject | null;
-    isEdit:boolean;
+    isEdit: boolean;
 }
 
-function NewCard({ handleAddTask, handleAddModalClose, currentTask, isEdit  }: NewCardProps) {
+function NewCard({ handleAddTask, handleAddModalClose, currentTask, isEdit }: NewCardProps) {
     const initialFormData: TaskObject = {
+        id: 0,
+        group: '',
         title: '',
         description: '',
         duedate: new Date(),
         priority: 'high',
         status: 'pending',
     };
+    const [newGroup, setNewGroup] = useState('');
+
     const [formData, setFormData] = useState<TaskObject>(currentTask || initialFormData);
 
     useEffect(() => {
@@ -30,14 +34,17 @@ function NewCard({ handleAddTask, handleAddModalClose, currentTask, isEdit  }: N
 
     const handleAddTaskClick = () => {
         // Retrieve input values and create a TaskObject
-        const titleElement = document.querySelector('.dialog-text') as HTMLInputElement;
+        const groupElement = document.querySelector('.dialog-group-text') as HTMLInputElement;
+        const titleElement = document.querySelector('.dialog-title-text') as HTMLInputElement;
         const descriptionElement = document.querySelector('.dialog-textarea') as HTMLTextAreaElement;
         const dueDateElement = document.querySelector('.dialog-date') as HTMLInputElement;
         const priorityElement = document.querySelector('.dialog-select-priority') as HTMLSelectElement;
         const statusElement = document.querySelector('.dialog-select-status') as HTMLSelectElement;
-        
-        if (titleElement && descriptionElement && dueDateElement && priorityElement && statusElement) {
+
+        if (groupElement && titleElement && descriptionElement && dueDateElement && priorityElement && statusElement) {
             const newTask: TaskObject = {
+                id: formData.id,
+                group: groupElement.value,
                 title: titleElement.value,
                 description: descriptionElement.value,
                 duedate: new Date(dueDateElement.value),
@@ -59,10 +66,15 @@ function NewCard({ handleAddTask, handleAddModalClose, currentTask, isEdit  }: N
     return (
         <dialog className='dialog-modal' open>
             <h2 className='dialog-h2'>Add Task</h2>
+            <div className='dialog-set-grp'>
+                <label className='dialog-label'><h3 className='dialog-h3'>Group:</h3>
+                    <input className='dialog-group-text' type="text" defaultValue={formData.group} />
+                </label>
+            </div>
 
             <div className='dialog-title-grp'>
                 <label className='dialog-label'><h3 className='dialog-h3'>Title:</h3>
-                    <input className='dialog-text' type="text" defaultValue={formData.title} />
+                    <input className='dialog-title-text' type="text" defaultValue={formData.title} />
                 </label>
             </div>
 

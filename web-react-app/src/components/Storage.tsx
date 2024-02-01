@@ -1,4 +1,6 @@
 export interface TaskObject {
+    id:number;
+    group?:string;
     title: string;
     description: string;
     duedate: Date;

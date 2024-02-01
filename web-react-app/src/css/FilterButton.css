@@ -1,6 +1,6 @@
-.sort-button,
-.sort-dropDown,
-.sort-option {
+.filter-button,
+.filter-dropDown,
+.filter-option {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;

@@ -1,10 +1,10 @@
 .task-button {
     border-radius: 5px;
-    padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     width: 180px;
+    height: 30px;
 }
 
 .task-button:hover {

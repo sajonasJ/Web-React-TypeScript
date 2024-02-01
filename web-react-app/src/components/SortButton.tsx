@@ -23,8 +23,8 @@ function SortButton(props: SortProps) {
 
   return (
     <div className='sort-button'>
-      <label htmlFor="dropDown"></label>
-      <select className="dropDown" value={selectedOption} onChange={handleChange}>
+      <label htmlFor="sort-dropDown"></label>
+      <select className="sort-dropDown" value={selectedOption} onChange={handleChange}>
         {props.options.map((option) => (
           <option className='sort-option' key={option.value} value={option.value}>
             {option.label}

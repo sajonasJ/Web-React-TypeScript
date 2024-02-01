@@ -1,11 +1,11 @@
 import '../css/Main.css';
 import TaskCard from '../components/TaskCard';
 import TaskButton from '../components/TaskButton';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NewCard from '../components/NewCard';
-import { TaskObject } from '../components/Storage';
-import { StorageService } from '../components/Storage';
-import SortButton,{ SortOption} from '../components/SortButton';
+import { TaskObject, StorageService } from '../components/Storage';
+import SortButton, { SortOption } from '../components/SortButton';
+import FilterButton, { FilterOption } from '../components/FilterButton';
 
 function Main() {
     const [isMiddleCardVisible, setIsMiddleCardVisible] = useState(false);
@@ -16,6 +16,20 @@ function Main() {
     const [checkedIndexes, setCheckedIndexes] = useState<number[]>([]);
     const [currentTask, setCurrentTask] = useState<TaskObject | null>(null);
     const [isEdit, setIsEdit] = useState(false);
+    const [groupedTasks, setGroupedTasks] = useState<Record<string, TaskObject[]>>({});
+
+    useEffect(() => {
+        const groups: Record<string, TaskObject[]> = {};
+        tasks.forEach(task => {
+            const group = task.group || 'No Group';
+            if (!groups[group]) {
+                groups[group] = [];
+            }
+            groups[group].push(task);
+        });
+        setGroupedTasks(groups);
+    }, [tasks]);
+
 
 
     const handleAction = (action: string, index?: number) => {
@@ -41,6 +55,7 @@ function Main() {
                 if (index !== undefined) {
                     setIsEdit(true); // Set isEdit to true when editing an existing task
                     setIsAddModalOpen(true);
+                    setCurrentTask(tasks[index]); // Set the current task to the task being edited
                     console.log(index);
                 }
                 break;
@@ -57,7 +72,14 @@ function Main() {
                 break;
 
             case 'sort':
-            break;
+                // Perform sort operation
+                alert('Sort operation clicked!');
+                break;
+
+            case 'filter':
+                // Perform filter operation
+                alert('filter operation clicked!');
+                break;
 
             default:
                 // Default action or error handling
@@ -69,9 +91,12 @@ function Main() {
         // Implement sorting logic based on the selected option
         // Update the 'tasks' state with the sorted array
         // For example, you can use the Array.sort() method
-      };
+    };
 
-      const sortOptions: SortOption[] = [
+    const handleFilter = (selectedOption: string) => {
+    };
+
+    const sortOptions: SortOption[] = [
         { label: 'Sort By: Default ', value: 'default' },
         { label: 'Name: (A-Z)', value: 'nameAsc' },
         { label: 'Name: (Z-A)', value: 'nameDesc' },
@@ -81,15 +106,24 @@ function Main() {
         { label: 'Priority: Medium', value: 'medium' },
         { label: 'Priority: Low', value: 'Low' },
         // Add more sorting options as needed
-      ];
+    ];
+    const filterOptions: FilterOption[] = [
+        { label: 'Filter By: Default ', value: 'default' },
+        { label: 'Pending', value: 'pending' },
+        { label: 'Completed', value: 'completed' },
+        { label: 'Overdue', value: 'overdue' },
+    ];
 
     const handleAddModalClose = () => {
         // Close the Add modal
         setIsAddModalOpen(false);
-        setIsEdit(false); 
+        setIsEdit(false);
         setCurrentTask(null); // Clear the current task
     };
+    const taskIdCounter = useRef(0);
+
     const handleAddTask = (newTask: TaskObject) => {
+        newTask.id = taskIdCounter.current++; // Assign a unique id to each new task
         const updatedTasks = [...tasks, newTask];
         setTasks(updatedTasks);
         setIsAddModalOpen(false);
@@ -102,6 +136,7 @@ function Main() {
             : [...checkedIndexes, index];
         setCheckedIndexes(updatedCheckedIndexes);
         setCurrentTask(tasks[index]);
+        console.log('handlecheckboxchange', index);
     };
 
     const handleDelete = () => {
@@ -120,21 +155,31 @@ function Main() {
                 <TaskButton label="View" onClickHandler={() => handleAction('view')} color="#1982c4" />
                 <TaskButton label="Delete" onClickHandler={() => handleAction('delete')} color="#ff595e" />
                 <SortButton options={sortOptions} handleSort={handleSort} />
+                <FilterButton options={filterOptions} handleFilter={handleFilter} />
             </div>
-
-            {/* Render existing tasks */}
-            {tasks.map((task: TaskObject, index) => (
-                <TaskCard key={index}
-                    index={index} // Pass the index as a prop
-                    {...task}
-                    isMiddleCardVisible={isMiddleCardVisible}
-                    isBottomCardVisible={isBottomCardVisible}
-                    isChecked={checkedIndexes.includes(index)}
-                    onCheckboxChange={handleCheckboxChange} // Pass the callback function
-                    onDelete={() => handleAction('delete', index)}
-                    onEdit={() => handleAction('edit', index)}
-                />
-            ))}
+            <div className='group-container'>
+                {/* Render existing tasks */}
+                {Object.entries(groupedTasks).map(([group, tasksInGroup]) => (
+                    <div className='groupings' key={group}>
+                        <h3 className='h3-groupings'>{group}</h3>
+                        {tasksInGroup.map((task: TaskObject) => {
+                            const taskIndex = tasks.findIndex(t => t.id === task.id);
+                            return (
+                                <TaskCard key={task.id}
+                                    index={taskIndex}
+                                    {...task}
+                                    isMiddleCardVisible={isMiddleCardVisible}
+                                    isBottomCardVisible={isBottomCardVisible}
+                                    isChecked={checkedIndexes.includes(taskIndex)}
+                                    onCheckboxChange={() => handleCheckboxChange(taskIndex)}
+                                    onDelete={() => handleAction('delete', taskIndex)}
+                                    onEdit={() => handleAction('edit', taskIndex)}
+                                />
+                            );
+                        })}
+                    </div>
+                ))}
+            </div>
 
             {isAddModalOpen && (
                 <NewCard
