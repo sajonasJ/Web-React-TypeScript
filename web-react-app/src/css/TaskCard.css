@@ -1,14 +1,19 @@
 .taskcard-container {
-    border: 1px solid #ddd;
+    /* border: 1px solid ; */
+    /* border-bottom: 1px solid #575757; */
+    
     border-radius: 8px;
     overflow: hidden;
     margin: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     min-width: 90%;
     align-items: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .left-card {
@@ -40,28 +45,43 @@
     padding-right: 10%;
     /* border: 1px solid black; */
     align-items: center;
+    /* border-bottom: 1px solid #575757; */
+    border-bottom: 1px solid transparent;
+    background-image: linear-gradient(to right, #575757, transparent);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
 }
 
 .middle-card {
     display: flex;
     flex-direction: row;
     width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 0px;
     padding-left: 5%;
     overflow: hidden;
     align-items: center;
+    border-bottom: 1px solid transparent;
+    background-image: linear-gradient(to right, #575757, transparent);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+
 }
 
 .bottom-card {
     display: flex;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 0px;
     padding-left: 0px;
     padding-right: 10%;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    
 }
 
 .status-card {

@@ -11,13 +11,18 @@ function Main() {
     const [isMiddleCardVisible, setIsMiddleCardVisible] = useState(false);
     const [isBottomCardVisible, setIsBottomCardVisible] = useState(false);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const initialTasks = StorageService.getTasks();
-    const [tasks, setTasks] = useState(initialTasks);
+    const [tasks, setTasks] = useState<TaskObject[]>([]);
     const [checkedIndexes, setCheckedIndexes] = useState<number[]>([]);
     const [currentTask, setCurrentTask] = useState<TaskObject | null>(null);
     const [isEdit, setIsEdit] = useState(false);
     const [groupedTasks, setGroupedTasks] = useState<Record<string, TaskObject[]>>({});
     const [filterOption, setFilterOption] = useState('default');
+
+    useEffect(() => {
+        // Initialize tasks from StorageService when the component mounts
+        setTasks(StorageService.getTasks());
+    }, []);
+
 
     useEffect(() => {
         const groups: Record<string, TaskObject[]> = {};
@@ -57,33 +62,29 @@ function Main() {
                     setIsEdit(true); // Set isEdit to true when editing an existing task
                     setIsAddModalOpen(true);
                     setCurrentTask(tasks[index]); // Set the current task to the task being edited
+                    StorageService.setTasks(tasks);
                     console.log(index);
                 }
                 break;
             case 'delete':
-                // Perform delete operation
                 alert('Delete operation clicked!');
                 handleDelete(); // Use the handleDelete function
                 break;
             case 'view':
-                // Perform view operation
                 alert('View operation clicked!');
                 setIsMiddleCardVisible(!isMiddleCardVisible);
                 setIsBottomCardVisible(!isBottomCardVisible);
                 break;
 
             case 'sort':
-                // Perform sort operation
                 alert('Sort operation clicked!');
                 break;
 
             case 'filter':
-                // Perform filter operation
                 alert('filter operation clicked!');
                 break;
 
             default:
-                // Default action or error handling
                 console.error('Invalid action');
                 setIsEdit(false);
         }
@@ -106,8 +107,8 @@ function Main() {
         { label: 'Date: DESC', value: 'dateDesc' },
         { label: 'Priorit: High', value: 'high' },
         { label: 'Priority: Medium', value: 'medium' },
-        { label: 'Priority: Low', value: 'Low' },
-        // Add more sorting options as needed
+        { label: 'Priority: Low', value: 'low' },
+
     ];
     const filterOptions: FilterOption[] = [
         { label: 'Filter By: Default ', value: 'default' },
@@ -117,20 +118,28 @@ function Main() {
     ];
 
     const handleAddModalClose = () => {
-        // Close the Add modal
         setIsAddModalOpen(false);
         setIsEdit(false);
-        setCurrentTask(null); // Clear the current task
+        setCurrentTask(null);
     };
-    const taskIdCounter = useRef(0);
+
+    const taskIdCounter = useRef(StorageService.getCounter() || 0);
 
     const handleAddTask = (newTask: TaskObject) => {
-        newTask.id = taskIdCounter.current++; // Assign a unique id to each new task
-        const updatedTasks = [...tasks, newTask];
-        setTasks(updatedTasks);
+        if (isEdit && currentTask) {
+            // If isEdit is true and currentTask is not null, update the existing task
+            const updatedTasks = tasks.map(task => task.id === currentTask.id ? newTask : task);
+            setTasks(updatedTasks);
+            StorageService.setTasks(updatedTasks);
+        } else {
+            // If isEdit is false, add a new task
+            newTask.id = taskIdCounter.current++; // Assign a unique id to each new task
+            StorageService.setCounter(taskIdCounter.current); // Update the counter in the local storage
+            const updatedTasks = [...tasks, newTask];
+            setTasks(updatedTasks);
+            StorageService.setTasks(updatedTasks);
+        }
         setIsAddModalOpen(false);
-        StorageService.setTasks(updatedTasks);
-        console.log(updatedTasks);
     };
     const handleCheckboxChange = (index: number) => {
         const updatedCheckedIndexes = checkedIndexes.includes(index)
@@ -145,7 +154,6 @@ function Main() {
         const updatedTasks = tasks.filter((_, index) => !checkedIndexes.includes(index));
         setTasks(updatedTasks);
         setCheckedIndexes([]);
-        StorageService.setTasks(updatedTasks);
     }
     return (
         <div className="main-container">
@@ -160,7 +168,7 @@ function Main() {
                 <FilterButton options={filterOptions} handleFilter={handleFilter} />
             </div>
             <div className='group-container'>
-                {/* Render existing tasks */}
+
                 {Object.entries(groupedTasks).map(([group, tasksInGroup]) => (
                     <div className='groupings' key={group}>
                         <h3 className='h3-groupings'>{group}</h3>
@@ -198,5 +206,6 @@ function Main() {
                 />)}
         </div>
     );
+
 }
 export default Main;

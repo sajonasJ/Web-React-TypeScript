@@ -8,7 +8,17 @@ export interface TaskObject {
     status: string;
 }
 
+
 export const StorageService = {
+    getCounter(): number | null {
+        const counter = localStorage.getItem('counter');
+        return counter ? Number(counter) : null;
+    },
+
+    setCounter(counter: number): void {
+        localStorage.setItem('counter', counter.toString());
+    },
+
     getTasks: (): TaskObject[] => {
         const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]') as TaskObject[];
         storedTasks.forEach(task => task.duedate = new Date(task.duedate));
