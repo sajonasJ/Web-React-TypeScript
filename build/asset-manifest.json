@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/web-react-typescript/static/css/main.6ef9c121.css",
+    "main.js": "/web-react-typescript/static/js/main.e3dc86d8.js",
+    "static/media/logo.svg": "/web-react-typescript/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/web-react-typescript/index.html",
+    "main.6ef9c121.css.map": "/web-react-typescript/static/css/main.6ef9c121.css.map",
+    "main.e3dc86d8.js.map": "/web-react-typescript/static/js/main.e3dc86d8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6ef9c121.css",
+    "static/js/main.e3dc86d8.js"
+  ]
+}
